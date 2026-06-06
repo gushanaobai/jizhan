@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础间距 -->
+    <dimen name="spacing_xxxsmall">2dp</dimen>
+    <dimen name="spacing_xxsmall">4dp</dimen>
+    <dimen name="spacing_xsmall">8dp</dimen>
+    <dimen name="spacing_small">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">48dp</dimen>
+    <dimen name="spacing_xxxlarge">64dp</dimen>
+
+    <!-- 组件间距 -->
+    <dimen name="margin_xxxsmall">2dp</dimen>
+    <dimen name="margin_xxsmall">4dp</dimen>
+    <dimen name="margin_xsmall">8dp</dimen>
+    <dimen name="margin_small">12dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xxlarge">48dp</dimen>
+    <dimen name="margin_xxxlarge">64dp</dimen>
+
+    <!-- 内边距 -->
+    <dimen name="padding_xxxsmall">2dp</dimen>
+    <dimen name="padding_xxsmall">4dp</dimen>
+    <dimen name="padding_xsmall">8dp</dimen>
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="padding_xlarge">32dp</dimen>
+    <dimen name="padding_xxlarge">48dp</dimen>
+    <dimen name="padding_xxxlarge">64dp</dimen>
+
+    <!-- 圆角 -->
+    <dimen name="radius_xxxsmall">2dp</dimen>
+    <dimen name="radius_xxsmall">4dp</dimen>
+    <dimen name="radius_xsmall">8dp</dimen>
+    <dimen name="radius_small">12dp</dimen>
+    <dimen name="radius_medium">16dp</dimen>
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="radius_xlarge">32dp</dimen>
+    <dimen name="radius_xxlarge">48dp</dimen>
+    <dimen name="radius_xxxlarge">64dp</dimen>
+    <dimen name="radius_circle">999dp</dimen>
+
+    <!-- 文字大小 -->
+    <dimen name="text_xxxsmall">8sp</dimen>
+    <dimen name="text_xxsmall">10sp</dimen>
+    <dimen name="text_xsmall">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">24sp</dimen>
+    <dimen name="text_xxxlarge">32sp</dimen>
+    <dimen name="text_display">48sp</dimen>
+
+    <!-- 行高 -->
+    <dimen name="line_height_xxxsmall">12sp</dimen>
+    <dimen name="line_height_xxsmall">14sp</dimen>
+    <dimen name="line_height_xsmall">16sp</dimen>
+    <dimen name="line_height_small">20sp</dimen>
+    <dimen name="line_height_medium">24sp</dimen>
+    <dimen name="line_height_large">28sp</dimen>
+    <dimen name="line_height_xlarge">32sp</dimen>
+    <dimen name="line_height_xxlarge">36sp</dimen>
+    <dimen name="line_height_xxxlarge">48sp</dimen>
+
+    <!-- 图标大小 -->
+    <dimen name="icon_xxxsmall">12dp</dimen>
+    <dimen name="icon_xxsmall">16dp</dimen>
+    <dimen name="icon_xsmall">20dp</dimen>
+    <dimen name="icon_small">24dp</dimen>
+    <dimen name="icon_medium">32dp</dimen>
+    <dimen name="icon_large">40dp</dimen>
+    <dimen name="icon_xlarge">48dp</dimen>
+    <dimen name="icon_xxlarge">56dp</dimen>
+    <dimen name="icon_xxxlarge">64dp</dimen>
+
+    <!-- 按钮大小 -->
+    <dimen name="button_height_small">32dp</dimen>
+    <dimen name="button_height_medium">40dp</dimen>
+    <dimen name="button_height_large">48dp</dimen>
+    <dimen name="button_height_xlarge">56dp</dimen>
+    <dimen name="button_min_width_small">64dp</dimen>
+    <dimen name="button_min_width_medium">80dp</dimen>
+    <dimen name="button_min_width_large">96dp</dimen>
+
+    <!-- 输入框大小 -->
+    <dimen name="input_height_small">32dp</dimen>
+    <dimen name="input_height_medium">40dp</dimen>
+    <dimen name="input_height_large">48dp</dimen>
+    <dimen name="input_height_xlarge">56dp</dimen>
+    <dimen name="input_min_width">200dp</dimen>
+
+    <!-- 头像大小 -->
+    <dimen name="avatar_xxxsmall">24dp</dimen>
+    <dimen name="avatar_xxsmall">32dp</dimen>
+    <dimen name="avatar_xsmall">40dp</dimen>
+    <dimen name="avatar_small">48dp</dimen>
+    <dimen name="avatar_medium">56dp</dimen>
+    <dimen name="avatar_large">64dp</dimen>
+    <dimen name="avatar_xlarge">80dp</dimen>
+    <dimen name="avatar_xxlarge">96dp</dimen>
+    <dimen name="avatar_xxxlarge">120dp</dimen>
+
+    <!-- 卡片大小 -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_elevation_pressed">4dp</dimen>
+    <dimen name="card_elevation_disabled">0dp</dimen>
+    <dimen name="card_min_height">64dp</dimen>
+    <dimen name="card_max_width">400dp</dimen>
+
+    <!-- 列表项大小 -->
+    <dimen name="list_item_height_small">48dp</dimen>
+    <dimen name="list_item_height_medium">56dp</dimen>
+    <dimen name="list_item_height_large">64dp</dimen>
+    <dimen name="list_item_height_xlarge">72dp</dimen>
+    <dimen name="list_item_min_width">200dp</dimen>
+
+    <!-- 分割线 -->
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="divider_height_thick">2dp</dimen>
+    <dimen name="divider_margin">16dp</dimen>
+
+    <!-- 阴影 -->
+    <dimen name="shadow_elevation_low">2dp</dimen>
+    <dimen name="shadow_elevation_medium">4dp</dimen>
+    <dimen name="shadow_elevation_high">8dp</dimen>
+    <dimen name="shadow_elevation_highest">16dp</dimen>
+
+    <!-- 动画 -->
+    <dimen name="animation_duration_fast">150</dimen>
+    <dimen name="animation_duration_medium">300</dimen>
+    <dimen name="animation_duration_slow">500</dimen>
+    <dimen name="animation_duration_very_slow">1000</dimen>
+
+    <!-- 顶部栏 -->
+    <dimen name="top_bar_height">56dp</dimen>
+    <dimen name="top_bar_height_large">64dp</dimen>
+    <dimen name="top_bar_elevation">4dp</dimen>
+    <dimen name="top_bar_padding_horizontal">16dp</dimen>
+    <dimen name="top_bar_padding_vertical">8dp</dimen>
+
+    <!-- 底部导航栏 -->
+    <dimen name="bottom_nav_height">56dp</dimen>
+    <dimen name="bottom_nav_elevation">8dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    <dimen name="bottom_nav_text_size">12sp</dimen>
+    <dimen name="bottom_nav_item_padding">8dp</dimen>
+
+    <!-- 浮动操作按钮 -->
+    <dimen name="fab_size_normal">56dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
+    <dimen name="fab_size_large">96dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_elevation_pressed">12dp</dimen>
+    <dimen name="fab_icon_size">24dp</dimen>
+
+    <!-- 对话框 -->
+    <dimen name="dialog_min_width">280dp</dimen>
+    <dimen name="dialog_max_width">560dp</dimen>
+    <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="dialog_title_size">20sp</dimen>
+    <dimen name="dialog_message_size">16sp</dimen>
+    <dimen name="dialog_button_height">48dp</dimen>
+    <dimen name="dialog_button_min_width">64dp</dimen>
+
+    <!-- 底部弹窗 -->
+    <dimen name="bottom_sheet_peek_height">256dp</dimen>
+    <dimen name="bottom_sheet_max_width">640dp</dimen>
+    <dimen name="bottom_sheet_padding">16dp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="bottom_sheet_drag_handle_width">32dp</dimen>
+    <dimen name="bottom_sheet_drag_handle_height">4dp</dimen>
+
+    <!-- 搜索栏 -->
+    <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="search_bar_elevation">2dp</dimen>
+    <dimen name="search_bar_margin">16dp</dimen>
+    <dimen name="search_bar_corner_radius">24dp</dimen>
+    <dimen name="search_icon_size">24dp</dimen>
+
+    <!-- 标签页 -->
+    <dimen name="tab_height">48dp</dimen>
+    <dimen name="tab_min_width">90dp</dimen>
+    <dimen name="tab_max_width">180dp</dimen>
+    <dimen name="tab_padding_horizontal">16dp</dimen>
+    <dimen name="tab_indicator_height">2dp</dimen>
+    <dimen name="tab_text_size">14sp</dimen>
+
+    <!-- 芯片 -->
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="chip_min_width">64dp</dimen>
+    <dimen name="chip_padding_horizontal">16dp</dimen>
+    <dimen name="chip_icon_size">18dp</dimen>
+    <dimen name="chip_text_size">14sp</dimen>
+    <dimen name="chip_corner_radius">16dp</dimen>
+
+    <!-- 开关 -->
+    <dimen name="switch_width">52dp</dimen>
+    <dimen name="switch_height">32dp</dimen>
+    <dimen name="switch_thumb_size">24dp</dimen>
+    <dimen name="switch_track_height">14dp</dimen>
+    <dimen name="switch_track_corner_radius">7dp</dimen>
+
+    <!-- 复选框 -->
+    <dimen name="checkbox_size">18dp</dimen>
+    <dimen name="checkbox_stroke_width">2dp</dimen>
+    <dimen name="checkbox_corner_radius">2dp</dimen>
+    <dimen name="checkbox_icon_size">16dp</dimen>
+
+    <!-- 单选按钮 -->
+    <dimen name="radio_size">20dp</dimen>
+    <dimen name="radio_stroke_width">2dp</dimen>
+    <dimen name="radio_icon_size">10dp</dimen>
+
+    <!-- 进度条 -->
+    <dimen name="progress_height_linear">4dp</dimen>
+    <dimen name="progress_height_circular">4dp</dimen>
+    <dimen name="progress_size_circular">48dp</dimen>
+    <dimen name="progress_size_circular_small">24dp</dimen>
+    <dimen name="progress_size_circular_large">64dp</dimen>
+    <dimen name="progress_corner_radius">2dp</dimen>
+
+    <!-- 滑块 -->
+    <dimen name="slider_height">20dp</dimen>
+    <dimen name="slider_thumb_size">20dp</dimen>
+    <dimen name="slider_track_height">4dp</dimen>
+    <dimen name="slider_track_corner_radius">2dp</dimen>
+
+    <!-- 工具提示 -->
+    <dimen name="tooltip_padding_horizontal">16dp</dimen>
+    <dimen name="tooltip_padding_vertical">8dp</dimen>
+    <dimen name="tooltip_corner_radius">4dp</dimen>
+    <dimen name="tooltip_text_size">14sp</dimen>
+    <dimen name="tooltip_max_width">200dp</dimen>
+
+    <!-- 消息条 -->
+    <dimen name="snackbar_min_height">48dp</dimen>
+    <dimen name="snackbar_padding_horizontal">16dp</dimen>
+    <dimen name="snackbar_padding_vertical">14dp</dimen>
+    <dimen name="snackbar_corner_radius">4dp</dimen>
+    <dimen name="snackbar_elevation">6dp</dimen>
+    <dimen name="snackbar_text_size">14sp</dimen>
+    <dimen name="snackbar_action_size">14sp</dimen>
+
+    <!-- 日期选择器 -->
+    <dimen name="date_picker_min_width">320dp</dimen>
+    <dimen name="date_picker_max_width">400dp</dimen>
+    <dimen name="date_picker_header_height">120dp</dimen>
+    <dimen name="date_picker_header_padding">16dp</dimen>
+    <dimen name="date_picker_header_text_size">16sp</dimen>
+    <dimen name="date_picker_day_size">40dp</dimen>
+    <dimen name="date_picker_day_text_size">14sp</dimen>
+    <dimen name="date_picker_day_today_size">40dp</dimen>
+    <dimen name="date_picker_day_today_text_size">14sp</dimen>
+
+    <!-- 时间选择器 -->
+    <dimen name="time_picker_min_width">320dp</dimen>
+    <dimen name="time_picker_max_width">400dp</dimen>
+    <dimen name="time_picker_header_height">120dp</dimen>
+    <dimen name="time_picker_header_padding">16dp</dimen>
+    <dimen name="time_picker_header_text_size">16sp</dimen>
+    <dimen name="time_picker_clock_size">256dp</dimen>
+    <dimen name="time_picker_clock_number_size">48dp</dimen>
+    <dimen name="time_picker_clock_number_text_size">16sp</dimen>
+
+    <!-- 图表 -->
+    <dimen name="chart_min_height">200dp</dimen>
+    <dimen name="chart_max_height">400dp</dimen>
+    <dimen name="chart_padding">16dp</dimen>
+    <dimen name="chart_label_size">12sp</dimen>
+    <dimen name="chart_value_size">14sp</dimen>
+    <dimen name="chart_title_size">16sp</dimen>
+    <dimen name="chart_legend_size">12sp</dimen>
+    <dimen name="chart_line_width">2dp</dimen>
+    <dimen name="chart_point_size">4dp</dimen>
+    <dimen name="chart_bar_width">24dp</dimen>
+    <dimen name="chart_bar_spacing">8dp</dimen>
+
+    <!-- 备份恢复 -->
+    <dimen name="backup_icon_size">64dp</dimen>
+    <dimen name="backup_title_size">20sp</dimen>
+    <dimen name="backup_description_size">16sp</dimen>
+    <dimen name="backup_progress_height">8dp</dimen>
+    <dimen name="backup_progress_corner_radius">4dp</dimen>
+
+    <!-- 关于页面 -->
+    <dimen name="about_logo_size">96dp</dimen>
+    <dimen name="about_app_name_size">24sp</dimen>
+    <dimen name="about_version_size">16sp</dimen>
+    <dimen name="about_description_size">14sp</dimen>
+    <dimen name="about_copyright_size">12sp</dimen>
+    <dimen name="about_link_size">14sp</dimen>
+
+    <!-- 隐私政策 -->
+    <dimen name="privacy_title_size">24sp</dimen>
+    <dimen name="privacy_heading_size">20sp</dimen>
+    <dimen name="privacy_subheading_size">18sp</dimen>
+    <dimen name="privacy_body_size">16sp</dimen>
+    <dimen name="privacy_list_size">16sp</dimen>
+    <dimen name="privacy_list_indent">24dp</dimen>
+    <dimen name="privacy_paragraph_spacing">16dp</dimen>
+</resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主色调 -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorPrimaryLight">#BBDEFB</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <!-- 功能颜色 -->
+    <color name="colorIncome">#4CAF50</color>
+    <color name="colorExpense">#F44336</color>
+    <color name="colorBudget">#FF9800</color>
+    <color name="colorWarning">#FF5722</color>
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorError">#F44336</color>
+    <color name="colorInfo">#2196F3</color>
+
+    <!-- 中性颜色 - 亮色主题 -->
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorSurfaceVariant">#F5F5F5</color>
+    <color name="colorOnBackground">#212121</color>
+    <color name="colorOnSurface">#212121</color>
+    <color name="colorOnSurfaceVariant">#757575</color>
+    <color name="colorOutline">#BDBDBD</color>
+    <color name="colorOutlineVariant">#E0E0E0</color>
+
+    <!-- 中性颜色 - 暗色主题 -->
+    <color name="colorBackgroundDark">#121212</color>
+    <color name="colorSurfaceDark">#1E1E1E</color>
+    <color name="colorSurfaceVariantDark">#2C2C2C</color>
+    <color name="colorOnBackgroundDark">#FFFFFF</color>
+    <color name="colorOnSurfaceDark">#FFFFFF</color>
+    <color name="colorOnSurfaceVariantDark">#B0B0B0</color>
+    <color name="colorOutlineDark">#404040</color>
+    <color name="colorOutlineVariantDark">#333333</color>
+
+    <!-- 文字颜色 -->
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#757575</color>
+    <color name="colorTextTertiary">#9E9E9E</color>
+    <color name="colorTextDisabled">#BDBDBD</color>
+    <color name="colorTextInverse">#FFFFFF</color>
+    <color name="colorTextLink">#2196F3</color>
+
+    <!-- 按钮颜色 -->
+    <color name="colorButtonPrimary">#2196F3</color>
+    <color name="colorButtonPrimaryDisabled">#90CAF9</color>
+    <color name="colorButtonSecondary">#FFFFFF</color>
+    <color name="colorButtonSecondaryDisabled">#F5F5F5</color>
+    <color name="colorButtonText">#FFFFFF</color>
+    <color name="colorButtonTextSecondary">#212121</color>
+
+    <!-- 输入框颜色 -->
+    <color name="colorInputBackground">#FFFFFF</color>
+    <color name="colorInputBorder">#BDBDBD</color>
+    <color name="colorInputBorderFocused">#2196F3</color>
+    <color name="colorInputBorderError">#F44336</color>
+    <color name="colorInputText">#212121</color>
+    <color name="colorInputHint">#9E9E9E</color>
+    <color name="colorInputHelper">#757575</color>
+    <color name="colorInputError">#F44336</color>
+
+    <!-- 卡片颜色 -->
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorCardBackgroundDisabled">#F5F5F5</color>
+    <color name="colorCardBorder">#E0E0E0</color>
+    <color name="colorCardShadow">#20000000</color>
+
+    <!-- 列表颜色 -->
+    <color name="colorListItemBackground">#FFFFFF</color>
+    <color name="colorListItemBackgroundSelected">#E3F2FD</color>
+    <color name="colorListItemBackgroundPressed">#BBDEFB</color>
+    <color name="colorListItemDivider">#E0E0E0</color>
+
+    <!-- 图表颜色 -->
+    <color name="colorChart1">#2196F3</color>
+    <color name="colorChart2">#4CAF50</color>
+    <color name="colorChart3">#FF9800</color>
+    <color name="colorChart4">#9C27B0</color>
+    <color name="colorChart5">#F44336</color>
+    <color name="colorChart6">#00BCD4</color>
+    <color name="colorChart7">#FF5722</color>
+    <color name="colorChart8">#607D8B</color>
+
+    <!-- 分类颜色 -->
+    <color name="colorCategoryFood">#FF5722</color>
+    <color name="colorCategoryTransport">#2196F3</color>
+    <color name="colorCategoryDaily">#4CAF50</color>
+    <color name="colorCategoryShopping">#E91E63</color>
+    <color name="colorCategoryEntertainment">#9C27B0</color>
+    <color name="colorCategoryMedical">#00BCD4</color>
+    <color name="colorCategoryEducation">#FF9800</color>
+    <color name="colorCategoryHousing">#795548</color>
+    <color name="colorCategoryCommunication">#607D8B</color>
+    <color name="colorCategorySocial">#F44336</color>
+    <color name="colorCategoryFinance">#3F51B5</color>
+    <color name="colorCategoryOther">#9E9E9E</color>
+    <color name="colorCategorySalary">#4CAF50</color>
+    <color name="colorCategoryBonus">#8BC34A</color>
+    <color name="colorCategoryInvestment">#009688</color>
+    <color name="colorCategoryParttime">#FF5722</color>
+    <color name="colorCategoryGift">#E91E63</color>
+    <color name="colorCategoryRefund">#FF9800</color>
+
+    <!-- 账户颜色 -->
+    <color name="colorAccountCash">#4CAF50</color>
+    <color name="colorAccountDebitCard">#2196F3</color>
+    <color name="colorAccountCreditCard">#F44336</color>
+    <color name="colorAccountAlipay">#1677FF</color>
+    <color name="colorAccountWechat">#07C160</color>
+    <color name="colorAccountEwallet">#FF9800</color>
+    <color name="colorAccountInvestment">#9C27B0</color>
+    <color name="colorAccountOther">#607D8B</color>
+
+    <!-- 状态颜色 -->
+    <color name="colorStatusSuccess">#4CAF50</color>
+    <color name="colorStatusWarning">#FF9800</color>
+    <color name="colorStatusError">#F44336</color>
+    <color name="colorStatusInfo">#2196F3</color>
+    <color name="colorStatusDisabled">#BDBDBD</color>
+
+    <!-- 渐变颜色 -->
+    <color name="colorGradientStart">#2196F3</color>
+    <color name="colorGradientEnd">#1976D2</color>
+    <color name="colorGradientIncomeStart">#4CAF50</color>
+    <color name="colorGradientIncomeEnd">#388E3C</color>
+    <color name="colorGradientExpenseStart">#F44336</color>
+    <color name="colorGradientExpenseEnd">#D32F2F</color>
+
+    <!-- 阴影颜色 -->
+    <color name="colorShadowLight">#20000000</color>
+    <color name="colorShadowMedium">#40000000</color>
+    <color name="colorShadowDark">#60000000</color>
+
+    <!-- 透明颜色 -->
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorSemiTransparent">#80000000</color>
+    <color name="colorOverlay">#40000000</color>
+</resources>

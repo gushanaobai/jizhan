@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 基础主题 -->
+    <style name="Theme.OpenLedger" parent="Theme.Material3.DayNight">
+        <!-- 主色调 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 状态栏 -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- 导航栏 -->
+        <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- 背景 -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+
+        <!-- 文字颜色 -->
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:textColorTertiary">@color/colorTextTertiary</item>
+
+        <!-- 字体 -->
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+
+        <!-- 动画 -->
+        <item name="android:windowAnimationStyle">@style/Animation.OpenLedger</item>
+
+        <!-- 键盘 -->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- 亮色主题 -->
+    <style name="Theme.OpenLedger.Light" parent="Theme.Material3.Light">
+        <!-- 主色调 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 状态栏 -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- 导航栏 -->
+        <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- 背景 -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+
+        <!-- 文字颜色 -->
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:textColorTertiary">@color/colorTextTertiary</item>
+
+        <!-- 字体 -->
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+
+        <!-- 动画 -->
+        <item name="android:windowAnimationStyle">@style/Animation.OpenLedger</item>
+
+        <!-- 键盘 -->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- 暗色主题 -->
+    <style name="Theme.OpenLedger.Dark" parent="Theme.Material3.Dark">
+        <!-- 主色调 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryLight">@color/colorPrimaryLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 状态栏 -->
+        <item name="android:statusBarColor">@color/colorBackgroundDark</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- 导航栏 -->
+        <item name="android:navigationBarColor">@color/colorSurfaceDark</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- 背景 -->
+        <item name="android:windowBackground">@color/colorBackgroundDark</item>
+        <item name="android:colorBackground">@color/colorBackgroundDark</item>
+
+        <!-- 文字颜色 -->
+        <item name="android:textColorPrimary">@color/colorOnBackgroundDark</item>
+        <item name="android:textColorSecondary">@color/colorOnSurfaceVariantDark</item>
+        <item name="android:textColorTertiary">@color/colorOnSurfaceVariantDark</item>
+
+        <!-- 字体 -->
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+
+        <!-- 动画 -->
+        <item name="android:windowAnimationStyle">@style/Animation.OpenLedger</item>
+
+        <!-- 键盘 -->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <!-- 动画样式 -->
+    <style name="Animation.OpenLedger" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <!-- 文字样式 -->
+    <style name="TextAppearance.OpenLedger.Display.Large" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxxlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Display.Medium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textSize">@dimen/text_xxxlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxxlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Display.Small" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textSize">@dimen/text_xxlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Headline.Large" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_xxlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Headline.Medium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">@dimen/text_xlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Headline.Small" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_large</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Title.Large" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_large</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Title.Medium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_medium</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Title.Small" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_small</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Body.Large" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_medium</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Body.Medium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_small</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Body.Small" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_xsmall</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xsmall</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Label.Large" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_small</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Label.Medium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/text_xsmall</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xsmall</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.OpenLedger.Label.Small" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/text_xxsmall</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxsmall</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- 按钮样式 -->
+    <style name="Widget.OpenLedger.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:minWidth">@dimen/button_min_width_medium</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">@dimen/radius_small</item>
+    </style>
+
+    <style name="Widget.OpenLedger.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:minWidth">@dimen/button_min_width_medium</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+        <item name="backgroundTint">@color/colorButtonPrimary</item>
+        <item name="cornerRadius">@dimen/radius_small</item>
+    </style>
+
+    <style name="Widget.OpenLedger.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:minWidth">@dimen/button_min_width_medium</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorButtonPrimary</item>
+        <item name="strokeColor">@color/colorButtonPrimary</item>
+        <item name="cornerRadius">@dimen/radius_small</item>
+    </style>
+
+    <style name="Widget.OpenLedger.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:minHeight">@dimen/button_height_medium</item>
+        <item name="android:minWidth">@dimen/button_min_width_medium</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorButtonPrimary</item>
+    </style>
+
+    <!-- 输入框样式 -->
+    <style name="Widget.OpenLedger.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:minHeight">@dimen/input_height_medium</item>
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="boxStrokeColor">@color/colorInputBorderFocused</item>
+        <item name="boxStrokeErrorColor">@color/colorInputBorderError</item>
+        <item name="boxBackgroundColor">@color/colorInputBackground</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_small</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_small</item>
+        <item name="hintTextColor">@color/colorPrimary</item>
+        <item name="errorTextColor">@color/colorInputError</item>
+        <item name="helperTextTextColor">@color/colorInputHelper</item>
+    </style>
+
+    <!-- 卡片样式 -->
+    <style name="Widget.OpenLedger.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="contentPadding">@dimen/padding_medium</item>
+        <item name="cardBackgroundColor">@color/colorCardBackground</item>
+    </style>
+
+    <!-- 列表样式 -->
+    <style name="Widget.OpenLedger.RecyclerView" parent="Widget.Material3.RecyclerView">
+        <item name="android:paddingLeft">@dimen/padding_medium</item>
+        <item name="android:paddingRight">@dimen/padding_medium</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:clipToPadding">false</item>
+    </style>
+
+    <!-- 底部导航栏样式 -->
+    <style name="Widget.OpenLedger.BottomNavigation" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:minHeight">@dimen/bottom_nav_height</item>
+        <item name="android:paddingTop">@dimen/padding_xsmall</item>
+        <item name="android:paddingBottom">@dimen/padding_xsmall</item>
+        <item name="itemIconSize">@dimen/bottom_nav_icon_size</item>
+        <item name="itemTextSize">@dimen/bottom_nav_text_size</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.OpenLedger.BottomNavigation.ActiveIndicator</item>
+    </style>
+
+    <style name="Widget.OpenLedger.BottomNavigation.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:width">@dimen/bottom_nav_icon_size</item>
+        <item name="android:height">@dimen/bottom_nav_icon_size</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.OpenLedger.Circle</item>
+    </style>
+
+    <!-- 浮动操作按钮样式 -->
+    <style name="Widget.OpenLedger.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="fabSize">normal</item>
+        <item name="fabCustomSize">@dimen/fab_size_normal</item>
+        <item name="maxImageSize">@dimen/fab_icon_size</item>
+        <item name="elevation">@dimen/fab_elevation</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.OpenLedger.Circle</item>
+    </style>
+
+    <!-- 对话框样式 -->
+    <style name="Theme.OpenLedger.Dialog" parent="Theme.Material3.Dialog">
+        <item name="android:windowBackground">@color/colorSurface</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowMinWidthMajor">@dimen/dialog_min_width</item>
+        <item name="android:windowMinWidthMinor">@dimen/dialog_min_width</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.OpenLedger.Dialog</item>
+    </style>
+
+    <!-- 底部弹窗样式 -->
+    <style name="Theme.OpenLedger.BottomSheetDialog" parent="Theme.Material3.BottomSheetDialog">
+        <item name="android:windowBackground">@color/colorSurface</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/Widget.OpenLedger.BottomSheet</item>
+    </style>
+
+    <style name="Widget.OpenLedger.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.OpenLedger.BottomSheet</item>
+        <item name="backgroundTint">@color/colorSurface</item>
+    </style>
+
+    <!-- 形状样式 -->
+    <style name="ShapeAppearance.OpenLedger.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.OpenLedger.Dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_large</item>
+    </style>
+
+    <style name="ShapeAppearance.OpenLedger.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_corner_radius</item>
+        <item name="cornerSizeTopRight">@dimen/bottom_sheet_corner_radius</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <!-- 自定义样式 -->
+    <style name="OpenLedger.TextStyle.Amount" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textSize">@dimen/text_xxlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xxlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.AmountIncome" parent="OpenLedger.TextStyle.Amount">
+        <item name="android:textColor">@color/colorIncome</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.AmountExpense" parent="OpenLedger.TextStyle.Amount">
+        <item name="android:textColor">@color/colorExpense</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.Category" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_small</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.Date" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_xsmall</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xsmall</item>
+        <item name="android:textColor">@color/colorTextTertiary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.Description" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/text_xsmall</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xsmall</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.StatisticsValue" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textSize">@dimen/text_xlarge</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_xlarge</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OpenLedger.TextStyle.StatisticsLabel" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingExtra">@dimen/line_height_small</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+</resources>
