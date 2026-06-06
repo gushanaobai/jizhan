@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易记账本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>简易记账本</h1>
+            <div class="balance">
+                <span>余额：</span>
+                <span id="balance">¥0.00</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="add-transaction">
+                <h2>添加记录</h2>
+                <form id="transaction-form">
+                    <div class="form-group">
+                        <label for="type">类型</label>
+                        <select id="type">
+                            <option value="income">收入</option>
+                            <option value="expense">支出</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">分类</label>
+                        <select id="category">
+                            <option value="salary">工资</option>
+                            <option value="bonus">奖金</option>
+                            <option value="food">餐饮</option>
+                            <option value="transport">交通</option>
+                            <option value="shopping">购物</option>
+                            <option value="entertainment">娱乐</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">金额</label>
+                        <input type="number" id="amount" placeholder="请输入金额" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">备注</label>
+                        <input type="text" id="description" placeholder="可选备注">
+                    </div>
+                    <button type="submit">添加</button>
+                </form>
+            </section>
+
+            <section class="transaction-list">
+                <h2>交易记录</h2>
+                <div class="filter">
+                    <select id="filter-type">
+                        <option value="all">全部</option>
+                        <option value="income">收入</option>
+                        <option value="expense">支出</option>
+                    </select>
+                </div>
+                <ul id="transactions"></ul>
+            </section>
+
+            <section class="statistics">
+                <h2>统计</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>本月收入</h3>
+                        <p id="monthly-income">¥0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>本月支出</h3>
+                        <p id="monthly-expense">¥0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>本月结余</h3>
+                        <p id="monthly-balance">¥0.00</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
