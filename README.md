@@ -1,13 +1,13 @@
-# 简易记账本
+# OpenLedger - 开源记账本
 
 <div align="center">
 
-**一款简单、实用的个人记账应用**
+**一款简单、实用、安全、开源的 Android 记账应用**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/zh-CN/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+[![Android](https://img.shields.io/badge/Platform-Android-green.svg)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-purple.svg)](https://kotlinlang.org)
+[![API](https://img.shields.io/badge/API-26%2B-brightgreen.svg)](https://android-arsenal.com/api?level=26)
 
 </div>
 
@@ -17,75 +17,121 @@
 - 📊 **数据统计**: 直观的图表展示消费趋势
 - 💰 **预算管理**: 设置月度预算并实时监控
 - 🏦 **多账户支持**: 支持现金、银行卡、支付宝、微信等多种账户
-- 📤 **数据导出**: 支持导出为 CSV 格式
+- 🔒 **数据安全**: 本地加密存储，支持数据备份与恢复
+- 📤 **数据导出**: 支持导出为 CSV、Excel 等格式
 - 🎨 **主题定制**: 支持亮色/暗色主题切换
 
 ## 🚀 快速开始
 
-### 在线体验
+### 环境要求
 
-直接在浏览器中打开 `index.html` 文件即可使用。
+- Android Studio Hedgehog (2023.1.1) 或更高版本
+- JDK 17 或更高版本
+- Android SDK 34
+- Kotlin 1.9.0 或更高版本
 
-### 本地运行
+### 安装步骤
+
+1. **克隆项目**
+   ```bash
+   git clone https://github.com/gushanaobai/jizhan.git
+   cd jizhan
+   ```
+
+2. **打开项目**
+   - 使用 Android Studio 打开项目
+   - 等待 Gradle 同步完成
+
+3. **运行应用**
+   - 连接 Android 设备或启动模拟器
+   - 点击运行按钮或使用命令行：
+   ```bash
+   ./gradlew installDebug
+   ```
+
+### 构建发布版本
 
 ```bash
-# 克隆项目
-git clone https://github.com/gushanaobai/jizhan.git
-cd jizhan
+# 构建 Debug 版本
+./gradlew assembleDebug
 
-# 使用浏览器打开
-open index.html  # macOS
-start index.html # Windows
-xdg-open index.html # Linux
+# 构建 Release 版本
+./gradlew assembleRelease
+
+# 运行测试
+./gradlew test
 ```
 
 ## 📖 使用指南
 
 ### 基本操作
 
-1. **记账**: 点击"添加记录"按钮，输入金额和分类
-2. **查看统计**: 在统计区域查看本月收支情况
-3. **筛选记录**: 使用筛选功能查看特定类型的记录
-4. **数据备份**: 数据自动保存在浏览器本地存储中
+1. **记账**: 点击底部"+"按钮，输入金额和分类
+2. **查看统计**: 进入统计页面，查看消费趋势
+3. **管理账户**: 在设置中添加和管理资金账户
+4. **设置预算**: 在预算页面设置月度预算
+5. **数据备份**: 在设置中备份和恢复数据
 
 ### 快捷操作
 
-- **快速记账**: 填写表单后点击"添加"按钮
-- **筛选记录**: 使用下拉菜单筛选收入/支出
-- **本地存储**: 数据自动保存在浏览器中
+- **左滑删除**: 在交易列表中左滑可删除记录
+- **右滑编辑**: 在交易列表中右滑可编辑记录
+- **下拉刷新**: 在列表页面下拉可刷新数据
 
 ## 🏗️ 项目结构
 
 ```
 jizhan/
-├── index.html              # 主页面
-├── style.css               # 样式文件
-├── script.js               # 主要功能代码
-├── app/                    # Android 应用模块
-├── core/                   # 核心功能模块
-├── docs/                   # 文档
-├── .github/                # GitHub 配置
-├── build.gradle.kts        # Gradle 构建配置
-├── settings.gradle.kts     # Gradle 设置
-└── README.md               # 项目说明
+├── app/                          # 主应用模块
+│   ├── src/main/
+│   │   ├── java/com/openledger/ # Kotlin 源代码
+│   │   └── res/                 # 资源文件
+│   └── build.gradle.kts         # 模块构建配置
+├── core/                         # 核心功能模块
+│   ├── core-common/             # 公共工具类
+│   ├── core-model/              # 数据模型
+│   └── core-database/           # 数据库操作
+├── docs/                         # 文档
+├── .github/                      # GitHub 配置
+├── build.gradle.kts              # 项目构建配置
+├── settings.gradle.kts           # 项目设置
+└── README.md                     # 项目说明
 ```
 
 ## 🛠️ 技术栈
 
-### Web 版本
-
-- **HTML5**: 页面结构
-- **CSS3**: 样式设计
-- **JavaScript**: 业务逻辑
-- **LocalStorage**: 本地数据存储
-
-### Android 版本（开发中）
+### 核心框架
 
 - **语言**: Kotlin
 - **UI 框架**: Jetpack Compose
 - **架构模式**: MVVM + Clean Architecture
 - **依赖注入**: Hilt
-- **本地数据库**: Room
+- **异步处理**: Kotlin Coroutines + Flow
+
+### Android Jetpack
+
+- **Lifecycle**: 生命周期管理
+- **ViewModel**: 视图状态管理
+- **Room**: 本地数据库
+- **Navigation**: 页面导航
+- **WorkManager**: 后台任务
+- **DataStore**: 数据存储
+
+### 第三方库
+
+- **Retrofit**: 网络请求
+- **OkHttp**: HTTP 客户端
+- **Gson/Moshi**: JSON 解析
+- **Coil**: 图片加载
+- **MPAndroidChart**: 图表库
+- **Lottie**: 动画库
+
+### 测试框架
+
+- **JUnit**: 单元测试
+- **Espresso**: UI 测试
+- **Mockk**: Mock 框架
+- **Turbine**: Flow 测试
 
 ## 📊 功能清单
 
@@ -93,22 +139,24 @@ jizhan/
 |------|------|------|
 | 收支记录 | ✅ 完成 | 支持收入/支出记录 |
 | 分类管理 | ✅ 完成 | 预设多种分类 |
-| 数据统计 | ✅ 完成 | 本月收支统计 |
-| 数据筛选 | ✅ 完成 | 按类型筛选记录 |
-| 本地存储 | ✅ 完成 | 浏览器本地存储 |
-| 多账户支持 | 🚧 开发中 | Android 版本 |
-| 数据导出 | 🚧 开发中 | CSV 导出功能 |
+| 数据统计 | 🚧 开发中 | 图表展示消费趋势 |
 | 预算管理 | 🚧 开发中 | 月度预算设置 |
+| 多账户支持 | 🚧 开发中 | 多种资金账户 |
+| 数据备份 | 🚧 开发中 | 本地加密备份 |
+| 数据导出 | 🚧 开发中 | CSV/Excel 导出 |
+| 主题定制 | 🚧 开发中 | 亮色/暗色主题 |
 
 ## 🤝 贡献指南
 
-欢迎贡献代码、报告问题或提出建议！
+我们欢迎所有形式的贡献！请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详细信息。
 
 ### 贡献方式
 
 1. **报告 Bug**: 通过 [GitHub Issues](https://github.com/gushanaobai/jizhan/issues) 报告问题
-2. **提出建议**: 通过 Issues 提出功能建议
+2. **提出建议**: 通过 [GitHub Discussions](https://github.com/gushanaobai/jizhan/discussions) 提出建议
 3. **提交代码**: 通过 Pull Request 提交代码
+4. **完善文档**: 帮助完善项目文档
+5. **翻译**: 帮助翻译应用界面
 
 ### 开发流程
 
@@ -135,15 +183,20 @@ git push origin feature/amazing-feature
 
 ## 🙏 致谢
 
-感谢以下开源项目：
+感谢以下开源项目和贡献者：
 
-- [MDN Web Docs](https://developer.mozilla.org/) - Web 技术文档
-- [GitHub](https://github.com/) - 代码托管平台
+- [Android Jetpack](https://developer.android.com/jetpack)
+- [Kotlin](https://kotlinlang.org)
+- [Material Design](https://material.io)
+- [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
+- [Hilt](https://dagger.dev/hilt/)
+- [Room](https://developer.android.com/training/data-storage/room)
 
 ## 📞 联系我们
 
 - **GitHub**: [gushanaobai/jizhan](https://github.com/gushanaobai/jizhan)
 - **Issues**: [GitHub Issues](https://github.com/gushanaobai/jizhan/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/gushanaobai/jizhan/discussions)
 
 ---
 
