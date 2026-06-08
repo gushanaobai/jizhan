@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.openledger.core.model.Transaction
 import com.openledger.core.model.Category
 import com.openledger.core.model.Account
+import com.openledger.ui.components.CategoryIcons
 import com.openledger.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -314,6 +315,8 @@ fun CategoryItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val icon = CategoryIcons.getCategoryIcon(category.name, category.isIncome)
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -338,11 +341,11 @@ fun CategoryItem(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = category.name.first().toString(),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-                color = if (isSelected) MaterialTheme.colorScheme.primary else TextSecondary
+            Icon(
+                imageVector = icon,
+                contentDescription = category.name,
+                modifier = Modifier.size(22.dp),
+                tint = if (isSelected) MaterialTheme.colorScheme.primary else TextSecondary
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -386,13 +389,22 @@ fun AccountSelector(
                         1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
                     ) else null
                 ) {
-                    Box(
+                    val accountIcon = CategoryIcons.getAccountIcon(account.name)
+                    Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable { onAccountSelected(account.id) }
                             .padding(vertical = 12.dp),
-                        contentAlignment = Alignment.Center
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
+                        Icon(
+                            imageVector = accountIcon,
+                            contentDescription = account.name,
+                            modifier = Modifier.size(16.dp),
+                            tint = if (isSelected) MaterialTheme.colorScheme.primary else TextSecondary
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             account.name,
                             style = MaterialTheme.typography.labelLarge,

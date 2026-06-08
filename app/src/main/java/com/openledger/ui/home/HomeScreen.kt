@@ -8,8 +8,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowDownward
-import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material3.*
@@ -26,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.openledger.core.common.utils.CurrencyUtils
 import com.openledger.core.common.utils.DateUtils
 import com.openledger.core.model.Transaction
+import com.openledger.ui.components.CategoryIcons
 import com.openledger.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -123,12 +122,15 @@ fun HomeScreen(
                 if (uiState.recentTransactions.isEmpty()) {
                     item { EmptyState() }
                 } else {
+                    val categoryMap = uiState.categories.associateBy { it.id }
                     items(
                         items = uiState.recentTransactions,
                         key = { it.id }
                     ) { transaction ->
+                        val category = categoryMap[transaction.categoryId]
                         TransactionItem(
                             transaction = transaction,
+                            categoryName = category?.name,
                             onDelete = { viewModel.deleteTransaction(transaction) }
                         )
                     }
@@ -350,8 +352,12 @@ fun QuickActionItem(
 @Composable
 fun TransactionItem(
     transaction: Transaction,
+    categoryName: String? = null,
     onDelete: () -> Unit
 ) {
+    val displayName = categoryName ?: transaction.description ?: if (transaction.isIncome) "收入" else "支出"
+    val icon = CategoryIcons.getCategoryIcon(displayName, transaction.isIncome)
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
@@ -373,8 +379,7 @@ fun TransactionItem(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = if (transaction.isIncome) Icons.Default.ArrowDownward
-                    else Icons.Default.ArrowUpward,
+                    imageVector = icon,
                     contentDescription = null,
                     tint = if (transaction.isIncome) IncomeGreen else ExpenseRed,
                     modifier = Modifier.size(20.dp)
@@ -385,7 +390,7 @@ fun TransactionItem(
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = transaction.description ?: if (transaction.isIncome) "收入" else "支出",
+                    text = displayName,
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium
                 )
