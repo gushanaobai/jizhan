@@ -82,20 +82,47 @@
 
 ```
 jizhan/
-├── app/                          # 主应用模块
+├── app/                                    # 主应用模块
 │   ├── src/main/
-│   │   ├── java/com/openledger/ # Kotlin 源代码
-│   │   └── res/                 # 资源文件
-│   └── build.gradle.kts         # 模块构建配置
-├── core/                         # 核心功能模块
-│   ├── core-common/             # 公共工具类
-│   ├── core-model/              # 数据模型
-│   └── core-database/           # 数据库操作
-├── docs/                         # 文档
-├── .github/                      # GitHub 配置
-├── build.gradle.kts              # 项目构建配置
-├── settings.gradle.kts           # 项目设置
-└── README.md                     # 项目说明
+│   │   ├── java/com/openledger/
+│   │   │   ├── MainActivity.kt            # 主 Activity + 导航
+│   │   │   ├── OpenLedgerApplication.kt   # Application 类
+│   │   │   ├── repository/               # 数据仓库层
+│   │   │   │   └── TransactionRepository.kt
+│   │   │   └── ui/                       # UI 层
+│   │   │       ├── theme/                # Material3 主题
+│   │   │       │   └── Theme.kt
+│   │   │       ├── home/                 # 首页模块
+│   │   │       │   ├── HomeScreen.kt
+│   │   │       │   └── HomeViewModel.kt
+│   │   │       └── add/                  # 记账模块
+│   │   │           ├── AddTransactionScreen.kt
+│   │   │           └── AddTransactionViewModel.kt
+│   │   └── res/                          # 资源文件
+│   └── build.gradle.kts                  # 模块构建配置
+├── core/                                  # 核心功能模块
+│   ├── core-common/                      # 公共工具类
+│   │   └── utils/
+│   │       ├── DateUtils.kt              # 日期工具
+│   │       └── CurrencyUtils.kt          # 货币工具
+│   ├── core-model/                       # 数据模型
+│   │   ├── Transaction.kt                # 交易记录
+│   │   ├── Category.kt                   # 分类
+│   │   ├── Account.kt                    # 账户
+│   │   └── Budget.kt                     # 预算
+│   └── core-database/                    # 数据库操作
+│       ├── OpenLedgerDatabase.kt         # Room 数据库
+│       ├── converter/DateConverter.kt    # 类型转换器
+│       └── dao/                          # 数据访问对象
+│           ├── TransactionDao.kt
+│           ├── CategoryDao.kt
+│           ├── AccountDao.kt
+│           └── BudgetDao.kt
+├── docs/                                  # 文档
+├── .github/                               # GitHub 配置
+├── build.gradle.kts                       # 项目构建配置
+├── settings.gradle.kts                    # 项目设置
+└── README.md                              # 项目说明
 ```
 
 ## 🛠️ 技术栈
@@ -137,14 +164,15 @@ jizhan/
 
 | 功能 | 状态 | 说明 |
 |------|------|------|
-| 收支记录 | ✅ 完成 | 支持收入/支出记录 |
-| 分类管理 | ✅ 完成 | 预设多种分类 |
-| 数据统计 | 🚧 开发中 | 图表展示消费趋势 |
+| 收支记录 | ✅ 完成 | 支持收入/支出记录，带分类和备注 |
+| 分类管理 | ✅ 完成 | 预设 19 种收支分类，支持自定义 |
+| 多账户支持 | ✅ 完成 | 现金、储蓄卡、支付宝、微信等 |
+| 数据统计 | ✅ 完成 | 本月收支概览、总余额展示 |
+| 本地存储 | ✅ 完成 | Room 数据库，数据持久化 |
+| 深色模式 | ✅ 完成 | Material3 动态主题，支持暗色模式 |
 | 预算管理 | 🚧 开发中 | 月度预算设置 |
-| 多账户支持 | 🚧 开发中 | 多种资金账户 |
 | 数据备份 | 🚧 开发中 | 本地加密备份 |
 | 数据导出 | 🚧 开发中 | CSV/Excel 导出 |
-| 主题定制 | 🚧 开发中 | 亮色/暗色主题 |
 
 ## 🤝 贡献指南
 

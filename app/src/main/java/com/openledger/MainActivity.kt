@@ -3,44 +3,69 @@ package com.openledger
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.openledger.ui.add.AddTransactionScreen
+import com.openledger.ui.home.HomeScreen
 import com.openledger.ui.theme.OpenLedgerTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * 主 Activity
+ *
+ * 应用的入口 Activity，使用 Jetpack Compose 构建 UI
+ */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             OpenLedgerTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    OpenLedgerApp()
                 }
             }
         }
     }
 }
 
+/**
+ * 应用主界面
+ *
+ * 包含导航逻辑
+ */
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun OpenLedgerApp() {
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OpenLedgerTheme {
-        Greeting("Android")
+    NavHost(
+        navController = navController,
+        startDestination = "home"
+    ) {
+        composable("home") {
+            HomeScreen(
+                onNavigateToAdd = {
+                    navController.navigate("add")
+                }
+            )
+        }
+        composable("add") {
+            AddTransactionScreen(
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
     }
 }
