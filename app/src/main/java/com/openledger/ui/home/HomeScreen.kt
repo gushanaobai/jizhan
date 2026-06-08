@@ -4,16 +4,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -22,12 +26,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.openledger.core.common.utils.CurrencyUtils
 import com.openledger.core.common.utils.DateUtils
 import com.openledger.core.model.Transaction
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.openledger.ui.theme.*
 
-/**
- * 首页界面
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -38,24 +38,30 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("OpenLedger") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "OpenLedger",
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = (-0.5).sp
+                    )
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.Transparent,
+                    titleContentColor = MaterialTheme.colorScheme.onBackground
                 )
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
+            ExtendedFloatingActionButton(
                 onClick = onNavigateToAdd,
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White,
+                shape = RoundedCornerShape(16.dp)
             ) {
-                Icon(
-                    Icons.Default.Add,
-                    contentDescription = "添加记录",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
+                Icon(Icons.Default.Add, contentDescription = null)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("记一笔")
             }
         }
     ) { paddingValues ->
@@ -64,45 +70,58 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
             }
         } else {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // 月度统计卡片
+                // 月度总览卡片
                 item {
-                    MonthlyStatsCard(
-                        monthlyIncome = uiState.monthlyIncome,
-                        monthlyExpense = uiState.monthlyExpense,
-                        monthlyBalance = uiState.monthlyBalance
+                    MonthlyOverviewCard(
+                        income = uiState.monthlyIncome,
+                        expense = uiState.monthlyExpense,
+                        balance = uiState.monthlyBalance
                     )
                 }
 
-                // 总余额卡片
+                // 总资产卡片
                 item {
-                    TotalBalanceCard(totalBalance = uiState.totalBalance)
+                    TotalAssetCard(totalBalance = uiState.totalBalance)
+                }
+
+                // 快捷操作
+                item {
+                    QuickActionRow()
                 }
 
                 // 最近交易标题
                 item {
-                    Text(
-                        text = "最近交易",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            "最近交易",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            "查看全部",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
 
-                // 交易记录列表
+                // 交易列表
                 if (uiState.recentTransactions.isEmpty()) {
-                    item {
-                        EmptyTransactionsCard()
-                    }
+                    item { EmptyState() }
                 } else {
                     items(
                         items = uiState.recentTransactions,
@@ -114,128 +133,220 @@ fun HomeScreen(
                         )
                     }
                 }
-            }
-        }
-    }
 
-    // 错误提示
-    uiState.errorMessage?.let { message ->
-        LaunchedEffect(message) {
-            viewModel.clearError()
+                // 底部留白
+                item { Spacer(modifier = Modifier.height(80.dp)) }
+            }
         }
     }
 }
 
-/**
- * 月度统计卡片
- */
 @Composable
-fun MonthlyStatsCard(
-    monthlyIncome: Double,
-    monthlyExpense: Double,
-    monthlyBalance: Double
+fun MonthlyOverviewCard(
+    income: Double,
+    expense: Double,
+    balance: Double
 ) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Transparent),
+        elevation = CardDefaults.cardElevation(0.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(Primary, PrimaryLight)
+                    ),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(24.dp)
+        ) {
+            Column {
+                Text(
+                    "本月概览",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.White.copy(alpha = 0.7f)
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column {
+                        Text(
+                            "收入",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(alpha = 0.6f)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            CurrencyUtils.formatCurrency(income),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                    Column {
+                        Text(
+                            "支出",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(alpha = 0.6f)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            CurrencyUtils.formatCurrency(expense),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                    Column {
+                        Text(
+                            "结余",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(alpha = 0.6f)
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            CurrencyUtils.formatCurrency(balance),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TotalAssetCard(totalBalance: Double) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        )
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(0.dp),
+        border = androidx.compose.foundation.BorderStroke(0.5.dp, BorderLight)
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
+                .padding(20.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(
-                text = "本月概览",
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+            Column {
+                Text(
+                    "总资产",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = TextHint
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    CurrencyUtils.formatCurrency(totalBalance),
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = if (totalBalance >= 0) IncomeGreen else ExpenseRed
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .size(44.dp)
+                    .clip(CircleShape)
+                    .background(IncomeBg),
+                contentAlignment = Alignment.Center
             ) {
-                StatItem(
-                    label = "收入",
-                    amount = monthlyIncome,
-                    color = Color(0xFF4CAF50)
-                )
-                StatItem(
-                    label = "支出",
-                    amount = monthlyExpense,
-                    color = Color(0xFFF44336)
-                )
-                StatItem(
-                    label = "结余",
-                    amount = monthlyBalance,
-                    color = if (monthlyBalance >= 0) Color(0xFF4CAF50) else Color(0xFFF44336)
+                Icon(
+                    Icons.Default.TrendingUp,
+                    contentDescription = null,
+                    tint = IncomeGreen,
+                    modifier = Modifier.size(22.dp)
                 )
             }
         }
     }
 }
 
-/**
- * 统计项
- */
 @Composable
-fun StatItem(
-    label: String,
-    amount: Double,
-    color: Color
-) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+fun QuickActionRow() {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        QuickActionItem(
+            label = "收入",
+            color = IncomeGreen,
+            bgColor = IncomeBg,
+            modifier = Modifier.weight(1f)
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = CurrencyUtils.formatCurrency(amount),
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = color
+        QuickActionItem(
+            label = "支出",
+            color = ExpenseRed,
+            bgColor = ExpenseBg,
+            modifier = Modifier.weight(1f)
+        )
+        QuickActionItem(
+            label = "转账",
+            color = Secondary,
+            bgColor = SecondaryContainer,
+            modifier = Modifier.weight(1f)
+        )
+        QuickActionItem(
+            label = "基金",
+            color = Color(0xFF534AB7),
+            bgColor = Color(0xFFEEEDFE),
+            modifier = Modifier.weight(1f)
         )
     }
 }
 
-/**
- * 总余额卡片
- */
 @Composable
-fun TotalBalanceCard(totalBalance: Double) {
+fun QuickActionItem(
+    label: String,
+    color: Color,
+    bgColor: Color,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp)
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = bgColor),
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp),
+                .padding(vertical = 14.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(color.copy(alpha = 0.15f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    label.first().toString(),
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Bold,
+                    color = color
+                )
+            }
+            Spacer(modifier = Modifier.height(6.dp))
             Text(
-                text = "总余额",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = CurrencyUtils.formatCurrency(totalBalance),
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold,
-                color = if (totalBalance >= 0) Color(0xFF4CAF50) else Color(0xFFF44336)
+                label,
+                style = MaterialTheme.typography.labelSmall,
+                color = color
             )
         }
     }
 }
 
-/**
- * 交易记录项
- */
 @Composable
 fun TransactionItem(
     transaction: Transaction,
@@ -243,85 +354,66 @@ fun TransactionItem(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(0.dp),
+        border = androidx.compose.foundation.BorderStroke(0.5.dp, BorderLight)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // 类型图标
             Box(
                 modifier = Modifier
-                    .size(40.dp)
-                    .background(
-                        color = if (transaction.isIncome) Color(0xFF4CAF50).copy(alpha = 0.1f)
-                        else Color(0xFFF44336).copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(10.dp)
-                    ),
+                    .size(42.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(if (transaction.isIncome) IncomeBg else ExpenseBg),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = if (transaction.isIncome) Icons.Default.ArrowDownward
                     else Icons.Default.ArrowUpward,
-                    contentDescription = if (transaction.isIncome) "收入" else "支出",
-                    tint = if (transaction.isIncome) Color(0xFF4CAF50) else Color(0xFFF44336),
-                    modifier = Modifier.size(24.dp)
+                    contentDescription = null,
+                    tint = if (transaction.isIncome) IncomeGreen else ExpenseRed,
+                    modifier = Modifier.size(20.dp)
                 )
             }
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // 交易信息
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = transaction.description ?: if (transaction.isIncome) "收入" else "支出",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Medium
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = DateUtils.formatDate(transaction.date, DateUtils.Formats.DATE_TIME),
+                    text = DateUtils.formatDate(transaction.date, DateUtils.Formats.CHINESE_DATE),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = TextHint
                 )
             }
 
-            // 金额
             Text(
                 text = "${if (transaction.isIncome) "+" else "-"}${CurrencyUtils.formatCurrency(transaction.amount)}",
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = if (transaction.isIncome) Color(0xFF4CAF50) else Color(0xFFF44336)
+                fontWeight = FontWeight.SemiBold,
+                color = if (transaction.isIncome) IncomeGreen else ExpenseRed
             )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            // 删除按钮
-            IconButton(
-                onClick = onDelete,
-                modifier = Modifier.size(32.dp)
-            ) {
-                Icon(
-                    Icons.Default.Delete,
-                    contentDescription = "删除",
-                    tint = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.size(20.dp)
-                )
-            }
         }
     }
 }
 
-/**
- * 空交易记录提示
- */
 @Composable
-fun EmptyTransactionsCard() {
+fun EmptyState() {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
         Box(
             modifier = Modifier
@@ -331,15 +423,15 @@ fun EmptyTransactionsCard() {
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "暂无交易记录",
+                    "暂无交易记录",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = TextHint
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = "点击右下角 + 添加第一笔记录",
+                    "点击下方按钮开始记账",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                    color = TextHint.copy(alpha = 0.6f)
                 )
             }
         }

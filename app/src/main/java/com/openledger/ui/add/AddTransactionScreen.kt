@@ -1,12 +1,14 @@
 package com.openledger.ui.add
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -17,18 +19,18 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.openledger.core.model.Transaction
 import com.openledger.core.model.Category
 import com.openledger.core.model.Account
+import com.openledger.ui.theme.*
 
-/**
- * 添加交易界面
- */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionScreen(
@@ -39,27 +41,27 @@ fun AddTransactionScreen(
     val categories by viewModel.categories.collectAsState()
     val accounts by viewModel.accounts.collectAsState()
 
-    // 保存成功后返回
     LaunchedEffect(uiState.isSaved) {
-        if (uiState.isSaved) {
-            onNavigateBack()
-        }
+        if (uiState.isSaved) onNavigateBack()
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("记账") },
+                title = {
+                    Text(
+                        "记账",
+                        fontWeight = FontWeight.SemiBold,
+                        letterSpacing = (-0.3).sp
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "返回")
                     }
                 },
                 actions = {
-                    IconButton(
-                        onClick = { viewModel.save() },
-                        enabled = !uiState.isSaving
-                    ) {
+                    IconButton(onClick = { viewModel.save() }, enabled = !uiState.isSaving) {
                         Icon(
                             Icons.Default.Check,
                             contentDescription = "保存",
@@ -68,7 +70,7 @@ fun AddTransactionScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
+                    containerColor = Color.Transparent
                 )
             )
         }
@@ -78,8 +80,8 @@ fun AddTransactionScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             // 收入/支出切换
             TypeSelector(
@@ -90,7 +92,8 @@ fun AddTransactionScreen(
             // 金额输入
             AmountInput(
                 amount = uiState.amount,
-                onAmountChange = viewModel::setAmount
+                onAmountChange = viewModel::setAmount,
+                isIncome = uiState.type == Transaction.TransactionType.INCOME
             )
 
             // 分类选择
@@ -111,13 +114,18 @@ fun AddTransactionScreen(
             OutlinedTextField(
                 value = uiState.description,
                 onValueChange = viewModel::setDescription,
-                label = { Text("备注（可选）") },
+                label = { Text("备注") },
+                placeholder = { Text("添加备注...", color = TextHint) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = BorderLight
+                )
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // 保存按钮
             Button(
@@ -126,59 +134,61 @@ fun AddTransactionScreen(
                     .fillMaxWidth()
                     .height(52.dp),
                 enabled = !uiState.isSaving,
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
             ) {
                 if (uiState.isSaving) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
+                        modifier = Modifier.size(22.dp),
+                        color = Color.White,
+                        strokeWidth = 2.dp
                     )
                 } else {
-                    Text("保存", fontWeight = FontWeight.Bold)
+                    Text(
+                        "保存记录",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 15.sp
+                    )
                 }
             }
-        }
-    }
 
-    // 错误提示
-    uiState.errorMessage?.let { message ->
-        LaunchedEffect(message) {
-            viewModel.clearError()
-        }
-        Snackbar(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(message)
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
 
-/**
- * 类型选择器
- */
 @Composable
 fun TypeSelector(
     selectedType: Transaction.TransactionType,
     onTypeSelected: (Transaction.TransactionType) -> Unit
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    Card(
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
-        TypeButton(
-            text = "支出",
-            isSelected = selectedType == Transaction.TransactionType.EXPENSE,
-            selectedColor = Color(0xFFF44336),
-            onClick = { onTypeSelected(Transaction.TransactionType.EXPENSE) },
-            modifier = Modifier.weight(1f)
-        )
-        TypeButton(
-            text = "收入",
-            isSelected = selectedType == Transaction.TransactionType.INCOME,
-            selectedColor = Color(0xFF4CAF50),
-            onClick = { onTypeSelected(Transaction.TransactionType.INCOME) },
-            modifier = Modifier.weight(1f)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+        ) {
+            TypeButton(
+                text = "支出",
+                isSelected = selectedType == Transaction.TransactionType.EXPENSE,
+                selectedColor = ExpenseRed,
+                onClick = { onTypeSelected(Transaction.TransactionType.EXPENSE) },
+                modifier = Modifier.weight(1f)
+            )
+            TypeButton(
+                text = "收入",
+                isSelected = selectedType == Transaction.TransactionType.INCOME,
+                selectedColor = IncomeGreen,
+                onClick = { onTypeSelected(Transaction.TransactionType.INCOME) },
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 }
 
@@ -192,46 +202,82 @@ fun TypeButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.height(48.dp),
+        modifier = modifier.height(42.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (isSelected) selectedColor else MaterialTheme.colorScheme.surfaceVariant,
-            contentColor = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+            containerColor = if (isSelected) selectedColor else Color.Transparent,
+            contentColor = if (isSelected) Color.White else TextSecondary
         ),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(10.dp),
+        elevation = ButtonDefaults.buttonElevation(0.dp)
     ) {
-        Text(text, fontWeight = FontWeight.Bold)
+        Text(text, fontWeight = FontWeight.Medium, fontSize = 14.sp)
     }
 }
 
-/**
- * 金额输入
- */
 @Composable
 fun AmountInput(
     amount: String,
-    onAmountChange: (String) -> Unit
+    onAmountChange: (String) -> Unit,
+    isIncome: Boolean
 ) {
-    OutlinedTextField(
-        value = amount,
-        onValueChange = { newValue ->
-            // 只允许数字和小数点
-            if (newValue.isEmpty() || newValue.matches(Regex("^\\d*\\.?\\d{0,2}$"))) {
-                onAmountChange(newValue)
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(0.dp),
+        border = androidx.compose.foundation.BorderStroke(0.5.dp, BorderLight)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
+            Text(
+                "金额",
+                style = MaterialTheme.typography.bodySmall,
+                color = TextHint
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    if (isIncome) "+" else "-",
+                    style = MaterialTheme.typography.headlineLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = if (isIncome) IncomeGreen else ExpenseRed,
+                    modifier = Modifier.padding(bottom = 2.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                Text(
+                    "¥",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Medium,
+                    color = TextHint,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Spacer(modifier = Modifier.width(4.dp))
+                OutlinedTextField(
+                    value = amount,
+                    onValueChange = { newValue ->
+                        if (newValue.isEmpty() || newValue.matches(Regex("^\\d*\\.?\\d{0,2}$"))) {
+                            onAmountChange(newValue)
+                        }
+                    },
+                    modifier = Modifier.weight(1f),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                    singleLine = true,
+                    placeholder = { Text("0.00", color = TextHint.copy(alpha = 0.4f)) },
+                    textStyle = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.Transparent,
+                        unfocusedBorderColor = Color.Transparent
+                    )
+                )
             }
-        },
-        label = { Text("金额") },
-        prefix = { Text("¥ ") },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-        singleLine = true,
-        shape = RoundedCornerShape(12.dp),
-        textStyle = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold)
-    )
+        }
+    }
 }
 
-/**
- * 分类选择器
- */
 @Composable
 fun CategorySelector(
     categories: List<Category>,
@@ -240,16 +286,16 @@ fun CategorySelector(
 ) {
     Column {
         Text(
-            text = "分类",
+            "分类",
             style = MaterialTheme.typography.titleSmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 12.dp)
         )
         LazyVerticalGrid(
             columns = GridCells.Fixed(4),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.heightIn(max = 200.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.heightIn(max = 220.dp)
         ) {
             items(categories) { category ->
                 CategoryItem(
@@ -271,40 +317,44 @@ fun CategoryItem(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
-            .padding(4.dp)
+            .padding(vertical = 4.dp)
     ) {
         Box(
             modifier = Modifier
                 .size(48.dp)
+                .clip(RoundedCornerShape(14.dp))
                 .background(
-                    color = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
-                    else MaterialTheme.colorScheme.surfaceVariant,
-                    shape = RoundedCornerShape(12.dp)
+                    if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                    else MaterialTheme.colorScheme.surfaceVariant
+                )
+                .then(
+                    if (isSelected) Modifier.border(
+                        1.5.dp,
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                        RoundedCornerShape(14.dp)
+                    ) else Modifier
                 ),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = category.name.first().toString(),
-                style = MaterialTheme.typography.titleMedium,
-                color = if (isSelected) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.onSurfaceVariant
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.SemiBold,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else TextSecondary
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = category.name,
-            style = MaterialTheme.typography.bodySmall,
-            color = if (isSelected) MaterialTheme.colorScheme.primary
-            else MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.labelSmall,
+            color = if (isSelected) MaterialTheme.colorScheme.primary else TextHint,
             maxLines = 1
         )
     }
 }
 
-/**
- * 账户选择器
- */
 @Composable
 fun AccountSelector(
     accounts: List<Account>,
@@ -313,22 +363,44 @@ fun AccountSelector(
 ) {
     Column {
         Text(
-            text = "账户",
+            "账户",
             style = MaterialTheme.typography.titleSmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 12.dp)
         )
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             accounts.forEach { account ->
-                FilterChip(
-                    selected = account.id == selectedAccountId,
-                    onClick = { onAccountSelected(account.id) },
-                    label = { Text(account.name) },
-                    modifier = Modifier.weight(1f)
-                )
+                val isSelected = account.id == selectedAccountId
+                Card(
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = if (isSelected) MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                        else MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                    elevation = CardDefaults.cardElevation(0.dp),
+                    border = if (isSelected) androidx.compose.foundation.BorderStroke(
+                        1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                    ) else null
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onAccountSelected(account.id) }
+                            .padding(vertical = 12.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            account.name,
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
+                            color = if (isSelected) MaterialTheme.colorScheme.primary else TextSecondary
+                        )
+                    }
+                }
             }
         }
     }
